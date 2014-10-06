@@ -1,2 +1,4 @@
 node*
 .package*
+.DS_Store
+.project
