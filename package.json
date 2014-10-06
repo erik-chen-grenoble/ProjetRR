@@ -1,0 +1,21 @@
+{
+	  "name": "RR2"
+	, "version": "0.0.1"
+	, "dependencies": {
+		  "express"		: ">=4.9"
+		, "fs-extra"	: ">=0.8"
+		, "socket.io"	: "~0.9.x"
+		, "request"		: ">=2.33"
+		, "body-parser"	: ">=1.4.3"
+		, "multer"		: ">=0.1.4"
+		}
+	, "main"		: "ServeurRasendeRoboter.js"
+	, "description"	: "Rasende Roboter in JS"
+	, "scripts"		: {
+		  "start": "node ServeurRasendeRoboter.js"
+		}
+	, "engines"		: {
+		  "node"	: "0.10.x"
+		, "npm"		: "1.2.x"
+		}
+}
