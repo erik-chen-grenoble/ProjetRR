@@ -7,6 +7,8 @@
 		<title>Rasende Roboter</title>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="js/logged.js"></script>
+		<script src="js/util.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 	<body onload="init()">
 		<header>
@@ -20,21 +22,32 @@
 				<ul id="lesParticipants" />
 			</nav>
 			<section id="partie">
-				<script type="text/javascript">XHR('GET', '/Dev', {onload: function() {
-					<![CDATA[
-					var configPlateau = JSON.parse(this.responseText);
-					console.log("Le serveur me renvoie :\n" + configPlateau.board.length); 
+				<script type="text/javascript">
 
-					for (var i = 0; i < configPlateau.board.length; i++) {
-						console.log("line");
-						for (var j = 0; j < configPlateau.board[i].length; j++) {
-							console.log(configPlateau.board[i][j]);
+				function init(){
+					XHR('GET', '/Dev', {onload: function() {
+						<![CDATA[
+						var configPlateau = JSON.parse(this.responseText);
+
+						var table = new Array();
+
+						for (var i = 0; i < configPlateau.board.length; i++) {
+							$("#board").append("<div>");
+							for (var j = 0; j < configPlateau.board[i].length; j++) {
+								var border = "";
+
+								console.log(flatArray(Object.keys(configPlateau.board[i][j])));
+								console.log($(".board"));
+								$("#board").append("<div>"+i+j+"</div>");
+							};
+							$("#board").append("</div>");
 						};
-					};
-
+						]]>	
 
 					} } );
-				]]>
+
+				}
+				
 				</script>
 			</section>
 		</section>
