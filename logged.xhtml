@@ -20,9 +20,6 @@
 		<section>
 			<nav>
 				<ul id="lesParticipants" />
-				<script type="text/javascript">
-					showParticipants();
-				</script>
 			</nav>
 			<section id="partie">
 				<script type="text/javascript">
@@ -55,10 +52,16 @@
 			</section>
 		</section>
 		<div id="board">
-		<h2>Plateau</h2>
+			<h2>Plateau</h2>
+		</div>
+		<div id="proposition">
+			<h3>Proposition</h3>
+			<script type="text/javascript">
+				XHR('POST', '/proposition','[{"command":"move"}]');
+			</script>
 		</div>
 		<footer>
-			Projet IHM de L3 MIAGE...
+			Copyright © 2014 4TREL Team
 		</footer>
 	</body>
 </html>
