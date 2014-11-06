@@ -24,29 +24,29 @@
 			<section id="partie">
 				<script type="text/javascript">
 
-				function init(){
-					XHR('GET', '/Dev', {onload: function() {
-						<![CDATA[
-						var configPlateau = JSON.parse(this.responseText);
+// 				function init(){
+// 					XHR('GET', '/Dev', {onload: function() {
+// 						<![CDATA[
+// 						var configPlateau = JSON.parse(this.responseText);
 
-						var table = new Array();
+// 						var table = new Array();
 
-						for (var i = 0; i < configPlateau.board.length; i++) {
-							$("#board").append("<div>");
-							for (var j = 0; j < configPlateau.board[i].length; j++) {
-								var border = "";
+// 						for (var i = 0; i < configPlateau.board.length; i++) {
+// 							$("#board").append("<div>");
+// 							for (var j = 0; j < configPlateau.board[i].length; j++) {
+// 								var border = "";
 
-								console.log(flatArray(Object.keys(configPlateau.board[i][j])));
-								console.log($(".board"));
-								$("#board").append("<div>"+i+j+"</div>");
-							};
-							$("#board").append("</div>");
-						};
-						]]>	
+// 								console.log(flatArray(Object.keys(configPlateau.board[i][j])));
+// 								console.log($(".board"));
+// 								$("#board").append("<div>"+i+j+"</div>");
+// 							};
+// 							$("#board").append("</div>");
+// 						};
+// 						]]>	
 
-					} } );
+// 					} } );
 
-				}
+// 				}
 				
 				</script>
 			</section>
@@ -57,7 +57,7 @@
 		<div id="proposition">
 			<h3>Proposition</h3>
 			<script type="text/javascript">
-				XHR('POST', '/proposition','[{"command":"move"}]');
+// 				XHR('POST', '/proposition','[{"command":"move"}]');
 			</script>
 		</div>
 		<footer>
