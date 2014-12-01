@@ -3,31 +3,78 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
-	<head>
-		<title>Rasende Roboter</title>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="js/login.js"></script>
-	</head>
-	<body onload="init()">
-		<header>
-			<h1>Bienvenue sur Rasende Roboter, le jeu de robots en ligne</h1>
-		</header>
-		<section>
-			<nav>
-				<form method="post" action="" id="nouvellePartie">
-					<label for="idGame">Entrez un nom pour la nouvelle partie : </label><input type="text" name="idGame" id="idGame"/>
-					<label for="login">Entrez votre nom : </label><input type="text" name="login" id="login"/>
-					<input type="submit" value="Nouveau jeu !" />
-				</form>
-				<ul id="lesParties"/>
-			</nav>
-			<section id="detailPartie">
-				
-			</section>
-		</section>
-		<footer>
-			Copyright © 2014 4TREL Team
-		</footer>
-	</body>
+<head>
+<title>Rasende Roboter</title>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/login.js"></script>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/main.css" rel="stylesheet" />
+</head>
+<body onload="init()">
+	<div class="container">
+		<div class="row" id="header">Rasender Roboter</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div id="left-panel">
+					<h4>
+						<span class="glyphicon glyphicon-info-sign"></span> Qu'est-ce que Rasende Roboter ?
+					</h4>
+					<div class="well well-sm">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Integer vitae suscipit arcu. Proin suscipit magna ut tincidunt
+							condimentum. Morbi condimentum nunc at eros pretium, at tincidunt
+							lorem consectetur. Vivamus at urna nibh. Mauris quis neque nisi.
+							Nulla molestie suscipit augue vitae ultricies. Nunc porttitor
+							cursus sem sit amet tempus. In lectus felis, tempus in hendrerit
+							vel, suscipit nec elit. Suspendisse convallis mattis orci, non
+							suscipit mauris laoreet ac. Pellentesque libero diam, feugiat ut
+							feugiat non, tempor eu justo. Curabitur accumsan condimentum
+							nunc, vitae accumsan eros placerat at. Suspendisse potenti.</p>
+						<p>Vestibulum sagittis eu ante sit amet blandit. Sed nisl
+							lectus, vulputate tempus justo id, interdum tincidunt dolor.
+							Nullam posuere tortor ac aliquam egestas. Etiam vel mi at magna
+							rhoncus euismod mollis in ipsum. Nunc fringilla posuere massa,
+							eget dignissim turpis elementum nec. Vivamus fermentum nibh quis
+							nisl hendrerit, id viverra dolor consectetur. Nulla eget enim
+							orci. In vitae porta quam, in dictum urna. Quisque at enim ornare
+							felis eleifend euismod. Sed risus tellus, blandit id convallis
+							in, rutrum at ipsum. Fusce eget diam ipsum. Duis pellentesque,
+							odio euismod imperdiet lobortis, nulla orci pulvinar erat, a
+							porttitor massa lorem vitae eros. Suspendisse vitae elit sit amet
+							tellus posuere lacinia.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div id="right-panel">
+					<div id="right-panel-content">
+						<h4>Rejoindre ou créer une partie</h4>
+						<form method="post" action="" id="nouvellePartie" role="form"
+							class="form-cnx">
+							<div class="form-group">
+								<input type="text" class="form-control" id="login" name="idGame" placeholder="Entrez un pseudo" /> 
+								<br />
+								<input type="text"	class="form-control" id="idGame" name="login" placeholder="Entrez un pseudo" />
+							</div>
+							<center>
+								<button type="submit" class="btn btn-action" style="margin-bottom: 20px; width: 50%;">Jouer</button>
+							</center>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="row" id="footer">4TREL Team - M2 MIAGE 2014/2015</div>
+
+	</div>
+
+	<!-- Fichiers Javascript -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
 </html>
 

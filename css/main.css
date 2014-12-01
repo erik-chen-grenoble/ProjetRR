@@ -1,0 +1,90 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+body{
+	font-family: 'PT Sans', sans-serif;
+}
+
+h1, h2, h3, h4{
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#header {
+	color : #2C3E50 ;
+	margin-top: 15px;
+	font-size: 30px;
+	text-align: center;
+}
+
+#footer {
+	text-align: center;
+}
+
+#left-panel {
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+	padding : 15px;
+
+	-moz-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	-webkit-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	-o-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	box-shadow: 0px 0px 50px 0px #c0c0c0;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#c0c0c0, Direction=180, Strength=50);
+
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#right-panel {
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+	padding : 0px;
+	padding-top: 10px;
+	padding-bottom: 0px;
+	
+	-moz-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	-webkit-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	-o-box-shadow: 0px 0px 50px 0px #c0c0c0;
+	box-shadow: 0px 0px 50px 0px #c0c0c0;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#c0c0c0, Direction=180, Strength=50);
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+
+	background-color: #2C3E50;
+	color: #fff;
+
+	text-align: center;
+}
+
+#right-panel-content {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+#right-panel-content h4 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#right-panel-content button{
+	color : #2C3E50 ;
+	font-weight: bold;
+}
+
+#right-panel-content button:hover{
+	-moz-box-shadow: 0px 0px 5px 0px #fff;
+	-webkit-box-shadow: 0px 0px 5px 0px #fff;
+	-o-box-shadow: 0px 0px 5px 0px #fff;
+	box-shadow: 0px 0px 5px 0px #fff;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=180, Strength=5);
+}
+
+#zone-arrow {
+	display: inline-block;
+}

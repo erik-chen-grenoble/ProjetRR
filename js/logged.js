@@ -62,9 +62,9 @@ function printTable(configPlateau){
                                 }else if(border=="db" || border=="bd"){
                                     classBorder = "angle_bas_droit";
                                 }
- 								value +="<td class=\"case "+classBorder+" ligne"+i+" colonne"+j+" "+"\">"+border+"</td>";
+ 								value +="<td class=\"case "+classBorder+" ligne"+i+" colonne"+j+" "+"\"></td>";
  							};
- 							$("#board").append("<tr class=\"ligne"+i+"\"></tr>");
+ 							$("#board").append("<tr class=\"ligne"+i+"\">"+value+"</tr>");
  						};
                         
                         var posRobot = new Array();
@@ -87,7 +87,7 @@ function printTable(configPlateau){
                             var border = flatArray(Object.keys(configPlateau.board[line][l]));
 
                             
-                            $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
+//                            $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
                         }
                 }                        
                 
@@ -166,7 +166,7 @@ function proposition(){
 	         ,   { 
 	         onload : function() {
 	        	 var reponseServer = JSON.parse(this.responseText);
-	        	 alert(reponseServer.state);
+	        	 document.getElementById('moveState').innerHTML = reponseServer.state; 
 	        
 	         }
 	         , variables : { 

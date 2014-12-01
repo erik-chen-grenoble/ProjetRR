@@ -1,0 +1,47 @@
+span.glyphicon-tower {
+    font-size: 1em;
+}
+
+.zone-coups .zone-texte{
+	font-size: 1.1em;
+	text-align: center;
+}
+
+#right-panel-content h3 {
+	text-align: center;
+}
+
+.zone-coups .zone-nb-coups {
+	text-align: center;
+	font-size: 3em;
+}
+
+.zone-nb-temps object {
+	width: 100px;
+	height: 100px;
+	margin-top: -20px;
+	margin-bottom: -30px;
+}
+
+.zone-temps .zone-texte{
+	font-size: 1.1em;
+	text-align: center;
+}
+.zone-temps .zone-nb-temps {
+	text-align: center;
+	font-size: 3em;
+}
+
+#barre-container {
+	background-color: #fff;
+	height: 3px;
+	width: 100%;
+
+	margin-bottom: 15px;
+}
+
+#barre {
+	background-color: #8aacce;
+	height: 3px;
+	width: 30%;
+}

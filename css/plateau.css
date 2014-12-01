@@ -1,0 +1,166 @@
+table {
+    border-collapse: collapse;
+}
+
+@media screen and (max-width: 640px) {
+    td, td>div {
+    	height: 20px;
+    	width: 20px;
+    }
+
+    #tab-container {
+        display: inline-block;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    td, td>div {
+    	height: 30px;
+    	width: 30px;
+    }
+
+    #tab-container {
+        display: inline-block;
+    }
+}
+
+
+/* Les angles */
+
+.angle_haut_gauche{
+	text-align: center;
+	background : url("../medias/images-svg/angle_haut_gauche.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+
+.angle_haut_droit {
+	text-align: center;
+	background : url("../medias/images-svg/angle_haut_droit.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.angle_bas_droit {
+	text-align: center;
+	background : url("../medias/images-svg/angle_bas_droit.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.angle_bas_gauche {
+	text-align: center;
+	background : url("../medias/images-svg/angle_bas_gauche.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+	/* les bords */
+
+.bord_haut {
+	text-align: center;
+	background : url("../medias/images-svg/bord_haut.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.bord_bas {
+	text-align: center;
+	background : url("../medias/images-svg/bord_bas.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.bord_gauche {
+	text-align: center;
+	background : url("../medias/images-svg/bord_gauche.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.bord_droit {
+	text-align: center;
+	background : url("../medias/images-svg/bord_droit.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+}
+
+.empty {
+	text-align: center;
+}
+
+
+.robot_red {
+	background : url("../medias/images-svg/robot-rouge.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+	z-index: 10;
+}
+
+.robot_green {
+	background : url("../medias/images-svg/robot-vert.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+	z-index: 10;
+}
+
+.robot_blue {
+	background : url("../medias/images-svg/robot-bleu.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+	z-index: 10;
+}
+
+.robot_yellow {
+	background : url("../medias/images-svg/robot-jaune.svg") no-repeat ;
+	background-size: 100% auto;
+	background-position: left top;
+	z-index: 10;
+}
+
+.target_red {
+	background : url("../medias/images-svg/cible-rouge.svg") no-repeat ;
+	background-size: 80% auto;
+	background-position: center center;
+	z-index: 5;
+}
+
+.target_green {
+	background : url("../medias/images-svg/cible-verte.svg") no-repeat ;
+	background-size: 80% auto;
+	background-position: center center;
+	z-index: 5;
+}
+
+.target_blue {
+	background : url("../medias/images-svg/cible-bleue.svg") no-repeat ;
+	background-size: 80% auto;
+	background-position: center center;
+	z-index: 5;
+}
+
+.target_yellow {
+	background : url("../medias/images-svg/cible-jaune.svg") no-repeat ;
+	background-size: 80% auto;
+	background-position: center center;
+	z-index: 5;
+}
+
+
+
+.case_deplacement {
+	background-color: #d7e4ea;
+}
+
+.arrows {
+	border-collapse: collapse;
+}
+
+.arrows td {
+}
+
+.arrows button {
+	height:35px;	
+	width:40px;
+}
