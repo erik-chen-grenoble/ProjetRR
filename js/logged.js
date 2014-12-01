@@ -34,6 +34,13 @@ function init() {
 		h1.innerHTML += ' est terminée !';
 	});
 	socket.on('solutions', function(data) {
+		var ul = document.getElementById('lesSolutions');
+		ul.innerHTML = '';
+		for (s in data.solutions) {
+			var li = document.createElement('li');
+			ul.appendChild(li);
+			li.appendChild(document.createTextNode(data.solutions[s]));
+		}
 		console.log("Solutions are :\n" + JSON.stringify(data.solutions));
 	});
 	socket.emit('identification', {
@@ -61,4 +68,8 @@ function showParticipants() {
 		idGame : document.getElementById('idGame').value
 	});
 	
+}
+
+function proposerSolution(){
+	alert('test');
 }
