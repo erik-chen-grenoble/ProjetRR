@@ -10,7 +10,7 @@
 		<script src="js/util.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
-	<body onload="init()">
+	<body onload="init('__IDGAME__')">
 		<header>
 			<h1>Partie __IDGAME__ __STATE__</h1>
 			<p>Vous êtes connecté en tant que __LOGIN__</p>
@@ -22,88 +22,6 @@
 				<ul id="lesParticipants" />
 			</nav>
 			<section id="partie">
-				<script type="text/javascript">
-
- 				function init(){
- 					XHR('GET', '__IDGAME__', {onload: function() {
- 						<![CDATA[
- 						var configPlateau = JSON.parse(this.responseText);
- 						
-                        printTable(configPlateau); 						
-
- 					} } );
-
- 				}
-                            
-                function authorizeMove(sens, configPlateau, ligne, colonne){
-                     if(sens == "d"){
-                        if(configPlateau.board[line][l].g == 1){
-                             $(".ligne"+line+" "+".colonne"+(l-1)).addClass("case_deplacement");
-                            return 
-                        }else if(configPlateau.board[line][l].d == 1){
-                             $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
-                            break;
-                        }
-                     }
-                }
-                        
-                function printTable(configPlateau){
-                    var table = new Array();
-
- 						for (var i = 0; i < configPlateau.board.length; i++) {
- 							//$("#board").append("<tr>");
-                            var value = "";
- 							for (var j = 0; j < configPlateau.board[i].length; j++) {
- 								var border = flatArray(Object.keys(configPlateau.board[i][j]));
-                                var classBorder = "";
-                                if(border=="g"){
-                                    classBorder = "bord_gauche";
-                                }else if(border=="d"){
-                                    classBorder = "bord_droit";
-                                }else if(border=="b"){
-                                    classBorder = "bord_bas";
-                                }else if(border=="h"){
-                                    classBorder = "bord_haut";
-                                }else if(border=="gh" || border=="hg"){
-                                    classBorder = "angle_haut_gauche";
-                                }else if(border=="dh" || border=="hd"){
-                                    classBorder = "angle_haut_droit";
-                                }else if(border=="gb" || border=="bg"){
-                                    classBorder = "angle_bas_gauche";
-                                }else if(border=="db" || border=="bd"){
-                                    classBorder = "angle_bas_droit";
-                                }
- 								value +="<td class=\"case "+classBorder+" ligne"+i+" colonne"+j+" "+"\">"+border+"</td>";
- 							};
- 							$("#board").append("<tr class=\"ligne"+i+"\">"+value+"</tr>");
- 						};
-                        
-                        var posRobot = new Array();
-                        posRobot = configPlateau.robots;
-                    
-                        for(var k = 0; k<posRobot.length; k++){
-                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).html("<div class=\"robot_"+posRobot[k].color+"\">r</div>");
-                        }
-                    
-                        var posTarget = configPlateau.target;   
-                    
-                        $(".ligne"+posTarget.l+" "+".colonne"+posTarget.c).html("<div class=\"target_"+posTarget.t+"\"></div>");
-                    
-                        console.log(posRobot[0].column);   
-                        console.log(posRobot[0]);
-                    
-                        var line = posRobot[0].line;
-                    
-                        for(var l = posRobot[0].column+1; l<configPlateau.board[0].length ; l++){
-                            var border = flatArray(Object.keys(configPlateau.board[line][l]));
-
-                            
-                            $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
-                        }
-                }
-                    ]]>	
-				
-				</script>
 			</section>
 		</section>
 		<table id="board">
