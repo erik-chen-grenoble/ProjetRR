@@ -40,7 +40,7 @@ function printTable(configPlateau){
                     var table = new Array();
 
  						for (var i = 0; i < configPlateau.board.length; i++) {
- 							//$("#board").append("<tr>");
+ 							// $("#board").append("<tr>");
                             var value = "";
  							for (var j = 0; j < configPlateau.board[i].length; j++) {
  								var border = flatArray(Object.keys(configPlateau.board[i][j]));
@@ -78,8 +78,8 @@ function printTable(configPlateau){
                     
                         $(".ligne"+posTarget.l+" "+".colonne"+posTarget.c).html("<div class=\"target_"+posTarget.t+"\"></div>");
                     
-                        //console.log(posRobot[0].column);   
-                        //console.log(posRobot[0]);
+                        // console.log(posRobot[0].column);
+                        // console.log(posRobot[0]);
                     
                         var line = posRobot[0].line;
                     
@@ -152,6 +152,28 @@ function showParticipants() {
 	
 }
 
-function proposerSolution(){
-	alert('test');
+/**
+ * Propose a move for a robot
+ */
+function proposition(){
+	var colorValue = document.getElementById('color').value;
+	var lineValue = document.getElementById('line').value;
+	var columnValue = document.getElementById('column').value;
+	var loginValue = document.getElementById('login').value;
+	var idGameValue = document.getElementById('idGame').value;
+	XHR( "POST"
+	         , "/proposition"
+	         ,   { 
+	         onload : function() {
+	        	 var reponseServer = JSON.parse(this.responseText);
+	        	 alert(reponseServer.state);
+	        
+	         }
+	         , variables : { 
+	        	 login : loginValue
+	        	 , idGame : idGameValue
+	        	 , proposition : JSON.stringify( [ { command: 'select' , robot: colorValue} , { command : 'move', line : lineValue , column: columnValue}])
+	         }
+	         }
+     );
 }
