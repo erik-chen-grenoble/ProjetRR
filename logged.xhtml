@@ -23,12 +23,11 @@
 	
 	
   <body onload="init('__IDGAME__')">
-
+	<input id="jsonProposition" type="hidden" value=""/>
     <div class="container">
 
 		<header>
-			<h1>Partie __IDGAME__ __STATE__</h1>
-			<p>Vous êtes connecté en tant que __LOGIN__</p>
+			<h2>Partie __IDGAME__ __STATE__ - __LOGIN__</h2>
 			<input id="login" type="hidden" value="__LOGIN__"/>
 			<input id="idGame" type="hidden" value="__IDGAME__"/>
 		</header>
@@ -99,48 +98,35 @@
                       <div id="barre-container">
                         <div id="barre"></div>
                       </div>
-
-
                   </div>
                 </div>
-
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   <div class="zone-coups">
-                      <div class="zone-texte"> Nombre de coups</div>
-                      <div class="zone-nb-coups"> 5 </div>
+                  	<span id="selectedRobot"></span>
+                    <div class="zone-texte"> Nombre de coups</div>
+                    <div class="zone-nb-coups"> 5 </div>
                   </div>
                 </div>
-
-
-
-
               </div>
-
-              
-
-
             </div>
-
           </div>
-
         </div>
+        <div class="col-md-4">
+        	<div id="right-panel-participant">
+        		<div id="right-panel-participant-content">
+                	<div class="zone-texte"> Participants</div>
+                	<ul id="lesParticipants" />
+                </div>
+        	</div>
+      	</div>
       </div>
 
       <div class="row" id="footer">
-<!--         &copy 4TREL Team - M2 MIAGE 2014/2015 -->
+		4TREL Team - M2 MIAGE 2014/2015
       </div>
 
     </div>
 </body>
-		<section> 
-			<nav>
-				<ul id="lesParticipants" />
-			</nav>
-			<section id="partie">
-			</section>
-		</section>
-		
-		
 		<div id="proposition">
 			<h3>Proposition</h3>
 			<label>Couleur : </label><input type="text" name="color" id="color" />

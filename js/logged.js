@@ -62,7 +62,7 @@ function printTable(configPlateau){
                                 }else if(border=="db" || border=="bd"){
                                     classBorder = "angle_bas_droit";
                                 }
- 								value +="<td class=\"case "+classBorder+" ligne"+i+" colonne"+j+" "+"\"></td>";
+ 								value +="<td class=\"case "+classBorder+" ligne"+i+" colonne"+j+" "+"\" onclick=\"addMovement('"+i+"','"+j+"')\"></td>";
  							};
  							$("#board").append("<tr class=\"ligne"+i+"\">"+value+"</tr>");
  						};
@@ -71,7 +71,8 @@ function printTable(configPlateau){
                         posRobot = configPlateau.robots;
                     
                         for(var k = 0; k<posRobot.length; k++){
-                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).html("<div class=\"robot_"+posRobot[k].color+"\">r</div>");
+                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).html("<div class=\"robot_"+posRobot[k].color+"\" onclick=\"selectRobot('"+posRobot[k].color+"')\"></div>");
+                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).attr('onclick','').unbind('click');
                         }
                     
                         var posTarget = configPlateau.target;   

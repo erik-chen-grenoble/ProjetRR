@@ -39,7 +39,7 @@ h1, h2, h3, h4{
 
 #right-panel {
 	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 
 	padding : 0px;
 	padding-top: 10px;
@@ -87,4 +87,27 @@ h1, h2, h3, h4{
 
 #zone-arrow {
 	display: inline-block;
+}
+
+#right-panel-participant{
+	margin-bottom: 15px;
+	font-size: 1.1em;
+	padding : 0px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+
+	background-color: #2C3E50;
+	color: #fff;
+
+	text-align: center;
+}
+
+#right-panel-participant-content {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
 }

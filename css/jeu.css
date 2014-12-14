@@ -45,3 +45,10 @@ span.glyphicon-tower {
 	height: 3px;
 	width: 30%;
 }
+
+#lesParticipants{
+	list-style-type: none;
+	text-align: left;
+	margin-left: 0px;
+	padding-left: 0px;	
+}
