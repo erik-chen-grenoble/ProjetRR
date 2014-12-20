@@ -38,7 +38,7 @@ function generatePlateau(idGame){
                 
 function printTable(configPlateau){
                     var table = new Array();
-
+                    $("#board").empty();
  						for (var i = 0; i < configPlateau.board.length; i++) {
  							// $("#board").append("<tr>");
                             var value = "";
@@ -71,16 +71,13 @@ function printTable(configPlateau){
                         posRobot = configPlateau.robots;
                     
                         for(var k = 0; k<posRobot.length; k++){
-                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).html("<div class=\"robot_"+posRobot[k].color+"\" onclick=\"selectRobot('"+posRobot[k].color+"')\"></div>");
+                            $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).html("<div class=\"robot_"+posRobot[k].color+"\" onclick=\"selectRobot('"+posRobot[k].color+"',"+posRobot[k].line+","+posRobot[k].column+")\"></div>");
                             $(".ligne"+posRobot[k].line+" "+".colonne"+posRobot[k].column).attr('onclick','').unbind('click');
                         }
                     
                         var posTarget = configPlateau.target;   
-                    
+                        $("#targetColor").val(posTarget.t);
                         $(".ligne"+posTarget.l+" "+".colonne"+posTarget.c).html("<div class=\"target_"+posTarget.t+"\"></div>");
-                    
-                        // console.log(posRobot[0].column);
-                        // console.log(posRobot[0]);
                     
                         var line = posRobot[0].line;
                     
@@ -88,7 +85,7 @@ function printTable(configPlateau){
                             var border = flatArray(Object.keys(configPlateau.board[line][l]));
 
                             
-//                            $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
+// $(".ligne"+line+" "+".colonne"+(l)).addClass("case_deplacement");
                         }
                 }                        
                 
@@ -157,24 +154,69 @@ function showParticipants() {
  * Propose a move for a robot
  */
 function proposition(){
-	var colorValue = document.getElementById('color').value;
-	var lineValue = document.getElementById('line').value;
-	var columnValue = document.getElementById('column').value;
-	var loginValue = document.getElementById('login').value;
-	var idGameValue = document.getElementById('idGame').value;
-	XHR( "POST"
-	         , "/proposition"
-	         ,   { 
-	         onload : function() {
-	        	 var reponseServer = JSON.parse(this.responseText);
-	        	 document.getElementById('moveState').innerHTML = reponseServer.state; 
-	        
-	         }
-	         , variables : { 
-	        	 login : loginValue
-	        	 , idGame : idGameValue
-	        	 , proposition : JSON.stringify( [ { command: 'select' , robot: colorValue} , { command : 'move', line : lineValue , column: columnValue}])
-	         }
-	         }
+  var loginValue = document.getElementById('login').value;
+  var idGameValue = document.getElementById('idGame').value;
+  var jsonProposition = '['+document.getElementById('jsonProposition').value+']';
+  
+  XHR( "POST"
+           , "/proposition"
+           ,   { 
+           onload : function() {
+             var reponseServer = JSON.parse(this.responseText);
+             receivePropositionResponse(reponseServer);
+          
+           }
+           , variables : { 
+             login : loginValue
+             , idGame : idGameValue
+             , proposition : jsonProposition
+           }
+           }
      );
+}
+
+/**
+ * Reset the game
+ */
+function reset(){
+	var idGame = $("#idGame").val();
+	init(idGame);
+	
+	$("#selectedRobotLine").val("");
+	$("#selectedRobotColumn").val("");
+	$("#selectedRobot").text("");
+	$("#jsonProposition").val("");
+	$("#nombreCoups").val("0");
+	$(".zone-nb-coups").text("0");
+	
+}
+
+/**
+ * Manage the proposition response from the server.
+ * 
+ * @param reponseServer
+ *            the response from the server.
+ */
+function receivePropositionResponse(reponseServer){
+	switch (reponseServer.state) {
+	case "INVALID_EMPTY":
+		document.getElementById('moveState').innerHTML = "Aucune proposition envoyée.";
+		break;
+	case "SUCCESS":
+		document.getElementById('moveState').innerHTML = "Proposition valide !";
+		break;
+	case "INCOMPLETE":
+		document.getElementById('moveState').innerHTML = "Proposition incomplète.";
+		break;
+	case "INVALID_MOVE":
+		document.getElementById('moveState').innerHTML = "Un robot doit bouger le long d'une ligne ou d'une colonne jusqu'à ce qu'il rencontre un autre robot ou un mur.";
+		break;
+	case "INVALID_SELECT":
+		document.getElementById('moveState').innerHTML = "Vous ne pouvez pas bouger un robot après l'avoir relaché.";
+		break;
+	default:
+		document.getElementById('moveState').innerHTML = reponseServer.state;
+		break;
+	}
+    
 }

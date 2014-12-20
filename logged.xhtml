@@ -24,6 +24,10 @@
 	
   <body onload="init('__IDGAME__')">
 	<input id="jsonProposition" type="hidden" value=""/>
+	<input id="nombreCoups" type="hidden" value="0"/>
+	<input id="targetColor" type="hidden" value=""/>
+	<input id="selectedRobotLine" type="hidden" value=""/>
+	<input id="selectedRobotColumn" type="hidden" value=""/>
     <div class="container">
 
 		<header>
@@ -82,7 +86,7 @@
                   
                   <div class="zone-coups">
                       <div class="zone-texte"> Nombre de coups</div>
-                      <div class="zone-nb-coups"> 5 </div>
+                      <div class="zone-nb-coups"> 0 </div>
                   </div>
                 </div>
 
@@ -101,11 +105,10 @@
                   </div>
                 </div>
                 <div class="col-sm-3 col-xs-3 col-md-12">
-                  <div class="zone-coups">
                   	<span id="selectedRobot"></span>
-                    <div class="zone-texte"> Nombre de coups</div>
-                    <div class="zone-nb-coups"> 5 </div>
-                  </div>
+                    <div id="moveState"></div>
+                    <button class="btn button-go" onclick="proposition()">Envoyer la solution</button>
+                    <button class="btn button-go" onclick="reset()">Reset</button>
                 </div>
               </div>
             </div>
@@ -127,15 +130,4 @@
 
     </div>
 </body>
-		<div id="proposition">
-			<h3>Proposition</h3>
-			<label>Couleur : </label><input type="text" name="color" id="color" />
-			<label>Ligne destination : </label><input type="text" name="line" id="line" />
-			<label>Colonne destination : </label><input type="text" name="column" id="column" />
-			<button onclick="proposition()">Proposer</button>
-			<label id="moveState"></label>
-		</div>
-		<div id="lesSolutions">
-			<h3>Solutions</h3>
-		</div>
 </html>
