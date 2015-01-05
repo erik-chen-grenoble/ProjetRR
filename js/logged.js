@@ -176,12 +176,39 @@ function proposition(){
 }
 
 /**
+ * Propose a single movement.
+ * @param robotColor the color of the robot.
+ * @param lineDestination the destination line.
+ * @param columnDestination the destination column.
+ */
+function proposeSingleMovement(robotColor,lineDestination,columnDestination){
+	  var loginValue = document.getElementById('login').value;
+	  var idGameValue = document.getElementById('idGame').value;
+	  var proposition = '[' +'{"command": "select" , "robot": "'+robotColor+'"} , {"command": "move" , "line": '+lineDestination+', "column": '+columnDestination+'}]';
+	  XHR( "POST"
+	           , "/proposition"
+	           ,   { 
+	           onload : function() {
+	             var reponseServer = JSON.parse(this.responseText);
+	             receivePropositionResponse(reponseServer);
+	          
+	           }
+	           , variables : { 
+	             login : loginValue
+	             , idGame : idGameValue
+	             , proposition : proposition
+	           }
+	           }
+	     );
+}
+
+/**
  * Reset the game
  */
 function reset(){
 	var idGame = $("#idGame").val();
 	init(idGame);
-	
+	$("#moveState").text("");
 	$("#selectedRobotLine").val("");
 	$("#selectedRobotColumn").val("");
 	$("#selectedRobot").text("");
@@ -198,6 +225,7 @@ function reset(){
  *            the response from the server.
  */
 function receivePropositionResponse(reponseServer){
+	$("#jsonPropositionResponse").val(reponseServer.state);
 	switch (reponseServer.state) {
 	case "INVALID_EMPTY":
 		document.getElementById('moveState').innerHTML = "Aucune proposition envoyée.";
@@ -217,6 +245,7 @@ function receivePropositionResponse(reponseServer){
 	default:
 		document.getElementById('moveState').innerHTML = reponseServer.state;
 		break;
-	}
-    
+	}  
 }
+
+

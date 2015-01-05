@@ -27,36 +27,15 @@ function selectRobot(color, line, column) {
 	$('#moveState').text("");
 	$('#selectedRobotLine').val(line);
 	$('#selectedRobotColumn').val(column);
-	switch (color) {
-	case 'red':
-		selectedRobot.text("red");
+		selectedRobot.text(color);
 		selectedRobot.css({
-			'color' : 'red',
+			'color' : color,
 			'font-size' : '150%'
 		});
-		break;
-	case 'blue':
-		selectedRobot.text("blue");
-		selectedRobot.css({
-			'color' : 'blue',
-			'font-size' : '150%'
-		});
-		break;
-	case 'green':
-		selectedRobot.text("green");
-		selectedRobot.css({
-			'color' : 'green',
-			'font-size' : '150%'
-		});
-		break;
-	case 'yellow':
-		selectedRobot.text("yellow");
-		selectedRobot.css({
-			'color' : 'yellow',
-			'font-size' : '150%'
-		});
-		break;
-	}
+		
+	refreshBoardColor();
+	// Update board movement possibilities
+	updatePossibilities(color,line,column);
 }
 
 /**
@@ -69,9 +48,15 @@ function selectRobot(color, line, column) {
  */
 function addMovement(lineDestination, columnDestination) {
 	var jsonProposition = $("#jsonProposition");
+	var robotColor = $("#selectedRobot").text();
+	var lineOrigin = $("#selectedRobotLine").val();
+	var columnOrigin = $("#selectedRobotColumn").val();
+
 	if ($("#selectedRobot").text().length === 0) {
 		document.getElementById('moveState').innerHTML = "Vous devez d'abord sélectionner un robot.";
-	} else {
+	} 
+	else if(isValidMove(lineDestination,columnDestination)){
+		$("#board td").css("background-color", "");
 		// Update the robot position
 		updateRobotPosition(lineDestination, columnDestination);
 		// Update the number of move
@@ -84,6 +69,7 @@ function addMovement(lineDestination, columnDestination) {
 				+ ' , {"command": "move" , "line": ' + lineDestination
 				+ ', "column": ' + columnDestination + '}');
 	}
+	
 }
 
 /**
@@ -124,4 +110,151 @@ function updateRobotPosition(lineDestination, columnDestination) {
 	// Update the position of the robot
 	$("#selectedRobotLine").val(lineDestination);
 	$("#selectedRobotColumn").val(columnDestination);
+	
+	refreshBoardColor();
+	updatePossibilities(selectedRobotColor,lineDestination,columnDestination);
+
+}
+
+
+function isValidMove(lineTo, columnTo){
+	var currentTd = $(".ligne"+lineTo).find(".ligne" + lineTo + " .colonne" + columnTo);
+	if(currentTd.css('background-color') == "rgb(0, 0, 0)"){
+		return true;
+	} 
+	return false;
+}
+
+/**
+ * Update the board color.
+ * @param color the selected robot color.
+ * @param line the current line of the robot.
+ * @param column the current column of the robot.
+ */
+function updatePossibilities(color,line,column){
+	var lineOrigin = $("#selectedRobotLine").val();
+	var columnOrigin = $("#selectedRobotColumn").val();
+	var robotPosition = $(".ligne"+line).find(".ligne" + line + " .colonne" + column);
+	var currentLine = $("tr.ligne"+lineOrigin).find("td");
+	var currentColumn = $("td.colonne"+columnOrigin);
+	var targetColor = $("#targetColor").val();
+	if(currentLine != null){
+		// check left to right
+		for (var i = column; i < currentLine.length; i++) {
+			var currentTd = $(".ligne"+line).find(".ligne" + line + " .colonne" + i);
+			var nextTd = $(".ligne"+line).find(".ligne" + line + " .colonne" + (i+1));
+			if(column != i && currentTd != null && currentTd.find("div").length > 0 && !currentTd.find("div").hasClass("target_"+targetColor)){
+				break;
+			}
+			if(currentTd != null && (currentTd.hasClass("bord_droit") || currentTd.hasClass("angle_bas_droit") || currentTd.hasClass("angle_haut_droit"))){
+				if(column != i) {
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else if (nextTd != null && nextTd.hasClass("bord_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+				if(column != i) {
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else{
+				currentTd.css({
+					'background-color' : color,
+				});
+			}
+		}
+		
+		// check right to left
+		for (var i = column; i >= 0; i--) {
+			var currentTd = $(".ligne"+line).find(".ligne" + line + " .colonne" + i);
+			var nextTd = $(".ligne"+line).find(".ligne" + line + " .colonne" + (i-1));
+			if(column != i && currentTd != null && currentTd.find("div").length > 0 && !currentTd.find("div").hasClass("target_"+targetColor)){
+				break;
+			}
+			if(currentTd != null && (currentTd.hasClass("bord_gauche") || currentTd.hasClass("angle_haut_gauche") || currentTd.hasClass("angle_bas_gauche"))){
+				if(column != i) {
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else if(nextTd != null &&  nextTd.hasClass("bord_droit") || nextTd.hasClass("angle_bas_droit") ||  nextTd.hasClass("angle_haut_droit") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+				if(column != i) {
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else{
+				currentTd.css({
+					'background-color' : color,
+				});
+			}
+		}
+		// check bottom to top
+		for (var i = line; i >= 0; i--) {
+			var currentTd = $(".ligne"+i).find(".ligne" + i + " .colonne"+column);
+			var nextTd = $(".ligne"+(i-1)).find(".ligne" + (i-1) + " .colonne"+column);
+			if(line != i && currentTd != null && currentTd.find("div").length > 0 && !currentTd.find("div").hasClass("target_"+targetColor)){
+				break;
+			}
+			if(currentTd != null && (currentTd.hasClass("bord_haut") || currentTd.hasClass("angle_haut_gauche") || currentTd.hasClass("angle_haut_droit") || (currentTd.find("div") != null && currentTd.find("div").hasClass("target_"+targetColor)))){
+				if(line != i){	
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else if(nextTd != null && nextTd.hasClass("angle_bas_droit") || nextTd.hasClass("bord_bas")  || nextTd.hasClass("angle_bas_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+				if(line != i){
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else{
+				currentTd.css({
+					'background-color' : color,
+				});
+			}
+		}
+		
+		// check top to bottom
+		for (var i = line; i < currentColumn.length; i++) {
+			var currentTd = $(".ligne"+i).find(".ligne" + i + " .colonne"+column);
+			var nextTd = $(".ligne"+(i+1)).find(".ligne" + (i+1) + " .colonne"+column);
+			if(line != i && currentTd != null && currentTd.find("div").length > 0 && !currentTd.find("div").hasClass("target_"+targetColor)){
+				break;
+			}
+			if(currentTd != null && (currentTd.hasClass("bord_bas") || currentTd.hasClass("angle_bas_gauche") || currentTd.hasClass("angle_bas_droit"))){
+				if(line != i){
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else if(nextTd != null && nextTd.hasClass("bord_haut") || nextTd.hasClass("angle_haut_droit") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+				if(line != i){
+					currentTd.css({
+						'background-color' : "black",
+					});
+				}
+				break;
+			} else{
+				currentTd.css({
+					'background-color' : color,
+				});
+			}
+		}
+	}
+}
+
+/**
+ * Clean the board background color.
+ */
+function refreshBoardColor(){
+	$("#board td").css("background-color", "");
 }

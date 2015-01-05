@@ -24,21 +24,22 @@
 	
   <body onload="init('__IDGAME__')">
 	<input id="jsonProposition" type="hidden" value=""/>
+	<input id="jsonPropositionResponse" type="hidden" value=""/>
 	<input id="nombreCoups" type="hidden" value="0"/>
 	<input id="targetColor" type="hidden" value=""/>
 	<input id="selectedRobotLine" type="hidden" value=""/>
 	<input id="selectedRobotColumn" type="hidden" value=""/>
     <div class="container">
 
+      	<div class="row" id="header">
+        	Rasender Roboter
+      	</div>
+
 		<header>
 			<h2>Partie __IDGAME__ __STATE__ - __LOGIN__</h2>
 			<input id="login" type="hidden" value="__LOGIN__"/>
 			<input id="idGame" type="hidden" value="__IDGAME__"/>
 		</header>
-
-      <div class="row" id="header">
-        Rasender Roboter
-      </div>
 
       <div class="row">
         <div class="col-md-8">
