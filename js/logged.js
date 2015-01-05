@@ -13,6 +13,13 @@ var XHR = function(method, ad, params) {
 	xhr.send(str);
 }
 
+var endGame = false;
+var waitingOther = false;
+
+function endGameOrNot(){
+    return endGame;
+}
+
 function authorizeMove(sens, configPlateau, ligne, colonne){
                      if(sens == "d"){
                         if(configPlateau.board[line][l].g == 1){
@@ -89,7 +96,7 @@ function printTable(configPlateau){
                         }
                 }                        
                 
-				
+var solutions = {};		
 
 function init(idGame,idPlayer) {
 	// Connect to the SocketIO server to retrieve ongoing games.
@@ -106,35 +113,14 @@ function init(idGame,idPlayer) {
 		}
 	});
 	socket.on('FinalCountDown', function(data) {
-		var ms = data.FinalCountDown;
-		console.log("FinalCountDown : " + ms);
-        finalCountDown(ms/1000);
+        var ms = data.FinalCountDown;
+        finalCountDown(ms/1000,ms/1000);
 	});
-    var solutions = {};
 	socket.on('TerminateGame', function(data) {
-        var nameWinner = [];
-        var propMin = 10000000;
-        console.log(solutions);
-        for(var i = 0; i<=solutions.solutions.length; i++){
-            if(solutions.solutions[i].proposition.length<propMin){
-                propMin=solutions.solutions[i].proposition.length;
-                nameWinner[nameWinner.length] = solutions.solutions[i].player;
-            }
+        endGame=true;
+        if(endGame && solutions.solutions.length>0){
+            determineWinner(idPlayer);
         }
-        
-        var winnerYou = false;
-        
-        if(nameWinner.length==1){
-            console.log("Winner ",nameWinner[0]);
-            winnerYou = winnerOrNot(nameWinner[0],idPlayer);
-        }else{
-            console.log("Ex eaquo ");
-            for(var j = 0; j<nameWinner.length; j++){
-                winnerYou = winnerOrNot(nameWinner[j],idPlayer);
-            }
-        }
-		h1 = document.querySelector('body > header > h1');
-		h1.innerHTML += ' est terminée !';
 	});
 	socket.on('solutions', function(data) {
         console.log("solution ", data);
@@ -147,11 +133,42 @@ function init(idGame,idPlayer) {
 			li.appendChild(document.createTextNode(data.solutions[s]));
 		}
 		console.log("Solutions are :\n" + JSON.stringify(data.solutions));
+        if(endGame){
+            determineWinneridPlayer
+        }
 	});
 	socket.emit('identification', {
 		login : document.getElementById('login').value,
 		idGame : document.getElementById('idGame').value
 	});
+}
+
+function determineWinner(idPlayer){
+    $('#sendSolution').prop('disabled', true);
+    $('#resetSolution').prop('disabled', true);
+    var nameWinner = [];
+    var propMin = 10000000;
+    
+    for(var i = 0; i<solutions.solutions.length; i++){
+        if(solutions.solutions[i].proposition.length<propMin){
+            propMin=solutions.solutions[i].proposition.length;
+            nameWinner[nameWinner.length] = solutions.solutions[i].player;
+        }
+    }
+
+    var winnerYou = false;
+
+    if(nameWinner.length==1){
+        console.log("Winner ",nameWinner[0]);
+        winnerYou = winnerOrNot(nameWinner[0],idPlayer);
+    }else{
+        console.log("Ex eaquo ");
+        for(var j = 0; j<nameWinner.length; j++){
+            winnerYou = winnerOrNot(nameWinner[j],idPlayer);
+        }
+    }
+    h1 = document.querySelector('body > header > h1');
+    h1.innerHTML += ' est terminée !';
 }
 
 function winnerOrNot(playerWin, playerId){
@@ -162,16 +179,22 @@ function winnerOrNot(playerWin, playerId){
     return false;
 }
 
-function finalCountDown(time){
-    if(time>=0){
-        $(".zone-nb-temps").html(time + "s");
-    }
-    if(time>0){
-        time--;
-        setTimeout("finalCountDown("+time+")", 1000);
+function finalCountDown(time,all){
+    if(!waitingOther){
+            if(time>=0){
+                $("#barre").css("width",((time*100)/all)+"%");
+                $(".zone-nb-temps").html(time + "s");
+            }
+            if(time>0){
+                time--;
+                setTimeout("finalCountDown("+time+","+all+")", 1000);
+            }else{
+                //LOCK GAME
+            }
     }else{
-        //LOCK GAME
+        $(".zone-nb-temps").html("En attente des autres joueurs");
     }
+    
 }
 
 /**
@@ -210,6 +233,11 @@ function proposition(){
              var reponseServer = JSON.parse(this.responseText);
              receivePropositionResponse(reponseServer);
                console.log(reponseServer);
+               if(reponseServer.state=="SUCCESS"){
+                    waitingOther = true;
+                    $('#sendSolution').prop('disabled', true);
+                    $('#resetSolution').prop('disabled', true);
+               }
           
            }
            , variables : { 
@@ -227,6 +255,8 @@ function proposition(){
 function reset(){
 	var idGame = $("#idGame").val();
 	init(idGame);
+    
+    //$(".zone-nb-temps").html('<object xmlns="http://www.w3.org/1999/xhtml" data="medias/images-svg/infinity-icon.svg" type="image/svg+xml">infini</object>');
 	
 	$("#selectedRobotLine").val("");
 	$("#selectedRobotColumn").val("");

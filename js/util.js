@@ -61,29 +61,31 @@ function selectRobot(color, line, column) {
 
 /**
  * Add the movement to the proposition json string.
- * 
+ *  
  * @param lineDestination
  *            the destination line.
  * @param columnDestination
  *            the destination column.
  */
 function addMovement(lineDestination, columnDestination) {
-	var jsonProposition = $("#jsonProposition");
-	if ($("#selectedRobot").text().length === 0) {
-		document.getElementById('moveState').innerHTML = "Vous devez d'abord sélectionner un robot.";
-	} else {
-		// Update the robot position
-		updateRobotPosition(lineDestination, columnDestination);
-		// Update the number of move
-		$("#nombreCoups").val(parseInt($("#nombreCoups").val())+1);
-		var nbCoups = $("#nombreCoups").val();
-		$(".zone-nb-coups").text(nbCoups);
-		
-		// Add the movement to the json string
-		jsonProposition.val(jsonProposition.val()
-				+ ' , {"command": "move" , "line": ' + lineDestination
-				+ ', "column": ' + columnDestination + '}');
-	}
+    if(!endGameOrNot()){
+        var jsonProposition = $("#jsonProposition");
+        if ($("#selectedRobot").text().length === 0) {
+            document.getElementById('moveState').innerHTML = "Vous devez d'abord sélectionner un robot.";
+        } else {
+            // Update the robot position
+            updateRobotPosition(lineDestination, columnDestination);
+            // Update the number of move
+            $("#nombreCoups").val(parseInt($("#nombreCoups").val())+1);
+            var nbCoups = $("#nombreCoups").val();
+            $(".zone-nb-coups").text(nbCoups);
+
+            // Add the movement to the json string
+            jsonProposition.val(jsonProposition.val()
+                    + ' , {"command": "move" , "line": ' + lineDestination
+                    + ', "column": ' + columnDestination + '}');
+        }
+    }
 }
 
 /**
