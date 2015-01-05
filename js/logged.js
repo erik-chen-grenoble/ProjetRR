@@ -91,7 +91,7 @@ function printTable(configPlateau){
                 
 				
 
-function init(idGame) {
+function init(idGame,idPlayer) {
 	// Connect to the SocketIO server to retrieve ongoing games.
     generatePlateau(idGame); 
                         
@@ -108,12 +108,37 @@ function init(idGame) {
 	socket.on('FinalCountDown', function(data) {
 		var ms = data.FinalCountDown;
 		console.log("FinalCountDown : " + ms);
+        finalCountDown(ms/1000);
 	});
+    var solutions = {};
 	socket.on('TerminateGame', function(data) {
+        var nameWinner = [];
+        var propMin = 10000000;
+        console.log(solutions);
+        for(var i = 0; i<=solutions.solutions.length; i++){
+            if(solutions.solutions[i].proposition.length<propMin){
+                propMin=solutions.solutions[i].proposition.length;
+                nameWinner[nameWinner.length] = solutions.solutions[i].player;
+            }
+        }
+        
+        var winnerYou = false;
+        
+        if(nameWinner.length==1){
+            console.log("Winner ",nameWinner[0]);
+            winnerYou = winnerOrNot(nameWinner[0],idPlayer);
+        }else{
+            console.log("Ex eaquo ");
+            for(var j = 0; j<nameWinner.length; j++){
+                winnerYou = winnerOrNot(nameWinner[j],idPlayer);
+            }
+        }
 		h1 = document.querySelector('body > header > h1');
 		h1.innerHTML += ' est terminée !';
 	});
 	socket.on('solutions', function(data) {
+        console.log("solution ", data);
+        solutions=data;
 		var ul = document.getElementById('lesSolutions');
 		ul.innerHTML = '';
 		for (s in data.solutions) {
@@ -127,6 +152,26 @@ function init(idGame) {
 		login : document.getElementById('login').value,
 		idGame : document.getElementById('idGame').value
 	});
+}
+
+function winnerOrNot(playerWin, playerId){
+    if(playerWin==playerId){
+        console.log("You are the winner"); 
+        return true;
+    }
+    return false;
+}
+
+function finalCountDown(time){
+    if(time>=0){
+        $(".zone-nb-temps").html(time + "s");
+    }
+    if(time>0){
+        time--;
+        setTimeout("finalCountDown("+time+")", 1000);
+    }else{
+        //LOCK GAME
+    }
 }
 
 /**
@@ -164,6 +209,7 @@ function proposition(){
            onload : function() {
              var reponseServer = JSON.parse(this.responseText);
              receivePropositionResponse(reponseServer);
+               console.log(reponseServer);
           
            }
            , variables : { 
