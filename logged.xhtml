@@ -22,7 +22,7 @@
 	</head>
 	
 	
-  <body onload="init('__IDGAME__')">
+  <body onload="init('__IDGAME__','__LOGIN__')">
 	<input id="jsonProposition" type="hidden" value=""/>
 	<input id="jsonPropositionResponse" type="hidden" value=""/>
 	<input id="nombreCoups" type="hidden" value="0"/>
@@ -108,8 +108,8 @@
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   	<span id="selectedRobot"></span>
                     <div id="moveState"></div>
-                    <button class="btn button-go" onclick="proposition()">Envoyer la solution</button>
-                    <button class="btn button-go" onclick="reset()">Reset</button>
+                    <button id="sendSolution" class="btn button-go" onclick="proposition()">Envoyer la solution</button>
+                    <button id="resetSolution" class="btn button-go" onclick="reset()">Reset</button>
                 </div>
               </div>
             </div>
