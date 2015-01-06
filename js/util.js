@@ -107,6 +107,7 @@ function updateRobotPosition(lineDestination, columnDestination) {
 	$("#selectedRobotColumn").val(columnDestination);
 	
 	refreshBoardColor();
+
 	updatePossibilities(selectedRobotColor,lineDestination,columnDestination);
 
 }
@@ -133,6 +134,8 @@ function updatePossibilities(color,line,column){
 	var currentLine = $("tr.ligne"+lineOrigin).find("td");
 	var currentColumn = $("td.colonne"+columnOrigin);
 	var targetColor = $("#targetColor").val();
+	line = parseInt(line);
+	column = parseInt(column);
 	if(currentLine != null){
 		// check left to right
 		for (var i = column; i < currentLine.length; i++) {
@@ -148,7 +151,7 @@ function updatePossibilities(color,line,column){
 					});
 				}
 				break;
-			} else if (nextTd != null && nextTd.hasClass("bord_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+			} else if (nextTd != null && nextTd.hasClass("bord_gauche") || nextTd.hasClass("angle_bas_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(column != i) {
 					currentTd.css({
 						'background-color' : "black",
@@ -220,7 +223,9 @@ function updatePossibilities(color,line,column){
 		// check top to bottom
 		for (var i = line; i < currentColumn.length; i++) {
 			var currentTd = $(".ligne"+i).find(".ligne" + i + " .colonne"+column);
+			var test = i+1;
 			var nextTd = $(".ligne"+(i+1)).find(".ligne" + (i+1) + " .colonne"+column);
+
 			if(line != i && currentTd != null && currentTd.find("div").length > 0 && !currentTd.find("div").hasClass("target_"+targetColor)){
 				break;
 			}
@@ -231,7 +236,7 @@ function updatePossibilities(color,line,column){
 					});
 				}
 				break;
-			} else if(nextTd != null && nextTd.hasClass("bord_haut") || nextTd.hasClass("angle_haut_droit") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
+			} else if(nextTd != null && nextTd.hasClass("bord_haut") || nextTd.hasClass("angle_haut_droit") || nextTd.hasClass("angle_haut_gauche")  || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(line != i){
 					currentTd.css({
 						'background-color' : "black",
