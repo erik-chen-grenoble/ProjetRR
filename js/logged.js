@@ -161,15 +161,15 @@ function determineWinner(idPlayer){
     animateBestSolution(propositionAnimate);
 
     var winnerYou = false;
-    
+
     $('#modal-victoire').modal('show');
 
     if(nameWinner.length==1){
         winnerYou = winnerOrNot(nameWinner[0],idPlayer);
         if(winnerYou){
-            $('.modal-body').html("Vous gagnez la partie.");
+            $('#textModalPartie').html("Vous gagnez la partie.");
         }else{
-            $('.modal-body').html(nameWinner[0]+" a gagné la partie.");
+            $('#textModalPartie').html(nameWinner[0]+" a gagné la partie.");
         }
         
     }else{
@@ -188,10 +188,10 @@ function determineWinner(idPlayer){
             }
         }
         if(winnerYou){
-            $('.modal-body').html("Vous gagnez la partie.");
-            $('.modal-body').append("<br/>Ainsi que "+stringEx);
+            $('#textModalPartie').html("Vous gagnez la partie.");
+            $('#textModalPartie').append("<br/>Ainsi que "+stringEx);
         }else{
-            $('.modal-body').html(stringEx+" ont gagnez la partie.");
+            $('#textModalPartie').html(stringEx+" ont gagnez la partie.");
         }
     }
     h1 = document.querySelector('body > header > h1');
@@ -218,21 +218,21 @@ function winnerOrNot(playerWin, playerId){
 }
 
 function finalCountDown(time,all){
-    if(!waitingOther){
-            if(time>=0){
-                $("#barre").css("width",((time*100)/all)+"%");
-                $(".zone-nb-temps").html(time + "s");
-            }
-            if(time>0){
-                time--;
-                setTimeout("finalCountDown("+time+","+all+")", 1000);
-            }else{
-                //LOCK GAME
-            }
-    }else{
-        $(".zone-nb-temps").html("En attente des autres joueurs");
+    if(time>=0){
+        $("#barre").css("width",((time*100)/all)+"%");
+        $(".zone-nb-temps").html(time + "s");
+        $("#tempsRestantPopin").html("Temps restant : "+time+"s");
+        
+        if(waitingOther){
+            $('#modal-attente').modal('show');
+        }
     }
-    
+    if(time>0){
+        time--;
+        setTimeout("finalCountDown("+time+","+all+")", 1000);
+    }else{
+        $('#modal-attente').modal('hide');
+    }
 }
 
 /**
