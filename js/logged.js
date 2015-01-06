@@ -355,6 +355,9 @@ function receivePropositionResponse(reponseServer){
 	case "INVALID_SELECT":
 		document.getElementById('moveState').innerHTML = "Vous ne pouvez pas bouger un robot après l'avoir relaché.";
 		break;
+	case "TOO_LATE":
+		document.getElementById('moveState').innerHTML = "Trop tard !";
+		break;
 	default:
 		document.getElementById('moveState').innerHTML = reponseServer.state;
 		break;
