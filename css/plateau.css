@@ -164,3 +164,36 @@ table {
 	height:35px;	
 	width:40px;
 }
+
+.td_light_path_red{
+	background-color: rgba(255, 214, 214, 0.7);
+}
+
+.td_dark_path_red{
+	background-color: rgba(255, 179, 179, 0.9);
+}
+
+.td_light_path_blue{
+	background-color: rgba(228, 241, 254, 0.7);
+}
+
+.td_dark_path_blue{
+	background-color: rgba(179, 199, 255, 0.9);
+}
+
+.td_light_path_yellow{
+	background-color: rgba(252, 255, 204, 0.7);
+	
+}
+
+.td_dark_path_yellow{
+	background-color: rgba(252, 255, 153, 0.9);
+}
+
+.td_light_path_green{
+	background-color: rgba(201, 255, 189, 0.7);
+}
+
+.td_dark_path_green{
+background-color: rgba(169, 255, 163, 0.9);	
+}

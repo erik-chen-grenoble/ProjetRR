@@ -85,7 +85,8 @@ function printTable(configPlateau){
                         var posTarget = configPlateau.target;   
                         $("#targetColor").val(posTarget.t);
                         $(".ligne"+posTarget.l+" "+".colonne"+posTarget.c).html("<div class=\"target_"+posTarget.t+"\"></div>");
-                    
+                        $("#lineTarget").val(posTarget.l);
+                        $("#columnTarget").val(posTarget.c);
                         var line = posRobot[0].line;
                     
                         for(var l = posRobot[0].column+1; l<configPlateau.board[0].length ; l++){

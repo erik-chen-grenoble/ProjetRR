@@ -63,6 +63,13 @@ function addMovement(lineDestination, columnDestination) {
             jsonProposition.val(jsonProposition.val()
                     + ' , {"command": "move" , "line": ' + lineDestination
                     + ', "column": ' + columnDestination + '}');
+            
+            // Check if the robot is in the target
+            if(isRobotOnTarget(lineDestination,columnDestination)){
+            	// End the game
+            	proposition();
+//            	reset();
+            }
         }
     }
 }
@@ -84,11 +91,15 @@ function updateRobotPosition(lineDestination, columnDestination) {
 	var tdDestination = $(".ligne"+lineDestination).find(".ligne" + lineDestination + " .colonne" + columnDestination);
 	var targetColor = $("#targetColor").val();
 	var tdDestinationTarget = tdDestination.find(".target_"+targetColor);
+	var lineT = $("lineTarget").val();
+	var columnT = $("columnTarget").val();
 	
+	$("td div").show();
 	// If the robot is on the target
 	if(tdDestinationTarget.length > 0){
-		// TODO robot on target. Disable click ?
-		tdDestinationTarget.remove();
+		tdDestinationTarget.hide();
+	} else{
+		
 	}
 	
 	// Create the destination div
@@ -112,10 +123,35 @@ function updateRobotPosition(lineDestination, columnDestination) {
 
 }
 
+/**
+ * Check if the good robot is on the target.
+ * @param lineDestination the destination line.
+ * @param columnDestination the destination column.
+ * @returns {Boolean}
+ */
+function isRobotOnTarget(lineDestination,columnDestination){
+	var targetColor = $("#targetColor").val();
+	var lineTarget = $("#lineTarget").val();
+	var columnTarget = $("#columnTarget").val();
+	var robotPosition = $(".ligne"+lineDestination).find(".ligne" + lineDestination + " .colonne" + columnDestination);
+	var selectedRobotColor = $("#selectedRobot").text();
+	
+	if(robotPosition != null && lineTarget==lineDestination && columnTarget==columnDestination && targetColor == selectedRobotColor){
+		return true;
+	}
+	return false;
+	
+}
 
+/**
+ * Check if the destination of the robot is valid.
+ * @param lineTo the destination line.
+ * @param columnTo the destination column.
+ * @returns {Boolean}
+ */
 function isValidMove(lineTo, columnTo){
 	var currentTd = $(".ligne"+lineTo).find(".ligne" + lineTo + " .colonne" + columnTo);
-	if(currentTd.css('background-color') == "rgb(0, 0, 0)"){
+	if(currentTd.hasClass("clickable")){
 		return true;
 	} 
 	return false;
@@ -146,22 +182,16 @@ function updatePossibilities(color,line,column){
 			}
 			if(currentTd != null && (currentTd.hasClass("bord_droit") || currentTd.hasClass("angle_bas_droit") || currentTd.hasClass("angle_haut_droit"))){
 				if(column != i) {
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else if (nextTd != null && nextTd.hasClass("bord_gauche") || nextTd.hasClass("angle_bas_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(column != i) {
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else{
-				currentTd.css({
-					'background-color' : color,
-				});
+					setClassColor(color, currentTd,false);
 			}
 		}
 		
@@ -174,22 +204,16 @@ function updatePossibilities(color,line,column){
 			}
 			if(currentTd != null && (currentTd.hasClass("bord_gauche") || currentTd.hasClass("angle_haut_gauche") || currentTd.hasClass("angle_bas_gauche"))){
 				if(column != i) {
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else if(nextTd != null &&  nextTd.hasClass("bord_droit") || nextTd.hasClass("angle_bas_droit") ||  nextTd.hasClass("angle_haut_droit") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(column != i) {
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else{
-				currentTd.css({
-					'background-color' : color,
-				});
+					setClassColor(color, currentTd,false);
 			}
 		}
 		// check bottom to top
@@ -201,22 +225,16 @@ function updatePossibilities(color,line,column){
 			}
 			if(currentTd != null && (currentTd.hasClass("bord_haut") || currentTd.hasClass("angle_haut_gauche") || currentTd.hasClass("angle_haut_droit") || (currentTd.find("div") != null && currentTd.find("div").hasClass("target_"+targetColor)))){
 				if(line != i){	
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else if(nextTd != null && nextTd.hasClass("angle_bas_droit") || nextTd.hasClass("bord_bas")  || nextTd.hasClass("angle_bas_gauche") || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(line != i){
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else{
-				currentTd.css({
-					'background-color' : color,
-				});
+					setClassColor(color, currentTd,false);
 			}
 		}
 		
@@ -231,22 +249,16 @@ function updatePossibilities(color,line,column){
 			}
 			if(currentTd != null && (currentTd.hasClass("bord_bas") || currentTd.hasClass("angle_bas_gauche") || currentTd.hasClass("angle_bas_droit"))){
 				if(line != i){
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else if(nextTd != null && nextTd.hasClass("bord_haut") || nextTd.hasClass("angle_haut_droit") || nextTd.hasClass("angle_haut_gauche")  || (nextTd.find("div").length > 0 && !nextTd.find("div").hasClass("target_"+targetColor))){
 				if(line != i){
-					currentTd.css({
-						'background-color' : "black",
-					});
+					setClassColor(color, currentTd,true);
 				}
 				break;
 			} else{
-				currentTd.css({
-					'background-color' : color,
-				});
+					setClassColor(color, currentTd,false);
 			}
 		}
 	}
@@ -256,5 +268,28 @@ function updatePossibilities(color,line,column){
  * Clean the board background color.
  */
 function refreshBoardColor(){
-	$("#board td").css("background-color", "");
+	$("#board td").removeClass("td_light_path_blue");
+	$("#board td").removeClass("td_dark_path_blue");
+	$("#board td").removeClass("td_light_path_red");
+	$("#board td").removeClass("td_dark_path_red");
+	$("#board td").removeClass("td_light_path_green");
+	$("#board td").removeClass("td_dark_path_green");
+	$("#board td").removeClass("td_light_path_yellow");
+	$("#board td").removeClass("td_dark_path_yellow");
+	$("#board td").removeClass("clickable");
+}
+
+/**
+ * Add a color class to the html element.
+ * @param color the class color.
+ * @param td the html element.
+ * @param isDarkColor true if the color is dark or not. 
+ */
+function setClassColor(color, td,isDarkColor){
+	if(isDarkColor){
+		td.addClass("td_dark_path_"+color);
+		td.addClass("clickable");
+	} else{
+		td.addClass("td_light_path_"+color);
+	}
 }
