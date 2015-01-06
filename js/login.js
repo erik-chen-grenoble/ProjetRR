@@ -15,3 +15,14 @@ function init() {
 	});
 	socket.emit('loginPage');
 }
+
+// function changeLogin(){
+	// if (document.getElementById('login') != null) {
+		// console.log(document.getElementById('login').value);
+		// $('#newForm input[name="login"]').val('test');
+	// } else {
+		// console.log(document.getElementById('login').value);
+		// $('#newForm input[name="login"]').val('prout');
+	// }
+// }
+
