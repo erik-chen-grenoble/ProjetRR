@@ -134,7 +134,7 @@ function init(idGame,idPlayer) {
 		}
 		console.log("Solutions are :\n" + JSON.stringify(data.solutions));
         if(endGame){
-            determineWinneridPlayer
+            determineWinner(idPlayer);
         }
 	});
 	socket.emit('identification', {
@@ -148,27 +148,65 @@ function determineWinner(idPlayer){
     $('#resetSolution').prop('disabled', true);
     var nameWinner = [];
     var propMin = 10000000;
+    var propositionAnimate;
     
     for(var i = 0; i<solutions.solutions.length; i++){
-        if(solutions.solutions[i].proposition.length<propMin){
+        if(solutions.solutions[i].proposition.length<=propMin){
             propMin=solutions.solutions[i].proposition.length;
+            propositionAnimate=solutions.solutions[i].proposition;
             nameWinner[nameWinner.length] = solutions.solutions[i].player;
         }
     }
+    
+    animateBestSolution(propositionAnimate);
 
     var winnerYou = false;
+    
+    $('#modal-victoire').modal('show');
 
     if(nameWinner.length==1){
-        console.log("Winner ",nameWinner[0]);
         winnerYou = winnerOrNot(nameWinner[0],idPlayer);
+        if(winnerYou){
+            $('.modal-body').html("Vous gagnez la partie.");
+        }else{
+            $('.modal-body').html(nameWinner[0]+" a gagné la partie.");
+        }
+        
     }else{
+        var firstEx=true;
+        var stringEx="";
         console.log("Ex eaquo ");
         for(var j = 0; j<nameWinner.length; j++){
             winnerYou = winnerOrNot(nameWinner[j],idPlayer);
+            if(!winnerYou){
+                if(firstEx){
+                    stringEx = nameWinner[j];
+                }else{
+                    firstEx=false;
+                    stringEx +=", "+nameWinner[j];
+                }
+            }
+        }
+        if(winnerYou){
+            $('.modal-body').html("Vous gagnez la partie.");
+            $('.modal-body').append("<br/>Ainsi que "+stringEx);
+        }else{
+            $('.modal-body').html(stringEx+" ont gagnez la partie.");
         }
     }
     h1 = document.querySelector('body > header > h1');
     h1.innerHTML += ' est terminée !';
+}
+
+function animateBestSolution(propositionAnimate){
+    var selector;
+    for(var i = 0; i<propositionAnimate.length; i++){
+        if(propositionAnimate[i].command=="select"){
+            selector = $(".robot_"+propositionAnimate[i].robot);   
+        }else if (propositionAnimate[i].command=="move"){
+            console.log(selector.parent().attr('class'));
+        }
+    }
 }
 
 function winnerOrNot(playerWin, playerId){
