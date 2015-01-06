@@ -62,29 +62,6 @@
 
               <div class="row">
                 <div class="col-sm-3 col-xs-3 col-md-12">
-                  <div id="zone-arrow">
-                    <table class="arrows">
-                        <tr>
-                          <td></td>
-                          <td><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span></button></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span></button></td>
-                          <td></td>
-                          <td><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span></button></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
-                          <td></td>
-                        </tr>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="col-sm-3 col-xs-3 col-md-12">
-                  
                   <div class="zone-coups">
                       <div class="zone-texte"> Nombre de coups</div>
                       <div class="zone-nb-coups"> 0 </div>
@@ -103,8 +80,18 @@
                       <div id="barre-container">
                         <div id="barre"></div>
                       </div>
-                  </div>
+                  </div>                  
                 </div>
+
+                <div class="col-sm-3 col-xs-3 col-md-12">
+                  <div id="right-panel-participant">
+						<div id="right-panel-participant-content">
+							<div class="zone-texte"> Participants</div>
+							<ul id="lesParticipants" />
+						</div>
+					</div>
+                </div>
+				
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   	<span id="selectedRobot"></span>
                     <div id="moveState"></div>
@@ -115,35 +102,40 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-        	<div id="right-panel-participant">
-        		<div id="right-panel-participant-content">
-                	<div class="zone-texte"> Participants</div>
-                	<ul id="lesParticipants" />
-                </div>
-        	</div>
-      	</div>
       </div>
 
 		<!-- Fenêtre modale victoire -->	
 		<div id="modal-victoire" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">La partie a été gagnée</h4>
-            </div>
-            <div class="modal-body">
-                <p>Jean-Charles a gagné la partie.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
-        </div>
-    </div>
-</div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">La partie a été gagnée</h4>
+					</div>
+					<div class="modal-body">
+						<p>Jean-Charles a gagné la partie.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    
+		<!-- Fenêtre modale message d'attente des autres joueurs -->
+		<div id="modal-attente" class="modal fade" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="background-color:#1c1c1c;color:#ecf0f1;margin-top:50%;">
+					<div class="modal-body" style="text-align:center;">
+						<img src="medias/images/loading.gif" />
+						<h3>En attente des autres joueurs</h3>
+						<p>Temps restant : 5s</p>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+			
       <div class="row" id="footer">
 		4TREL Team - M2 MIAGE 2014/2015
       </div>
