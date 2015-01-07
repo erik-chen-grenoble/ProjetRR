@@ -103,6 +103,9 @@
                 </div>
 				
                 <div class="col-sm-3 col-xs-3 col-md-12">
+                    <span>Cible :</span>
+                	<div id="cible"></div>
+                    <span id="moreColorInfo"></span>
                   	<span id="selectedRobot"></span>
                     <div id="moveState"></div>
                     <button id="sendSolution" class="btn button-go texte_SC" onclick="proposition()">Envoyer la solution</button>
@@ -115,18 +118,17 @@
       </div>
 
 		<!-- Fenêtre modale victoire -->	
-		<div id="modal-victoire" class="modal fade">
+		<div id="modal-victoire" class="modal fade" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">La partie a été gagnée</h4>
 					</div>
 					<div class="modal-body" id="textModalPartie">
 						<p>Jean-Charles a gagné la partie.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						<button id="butonAccueil" type="button" class="btn btn-default" data-dismiss="modal">Accueil</button>
 					</div>
 				</div>
 			</div>

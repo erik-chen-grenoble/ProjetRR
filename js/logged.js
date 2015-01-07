@@ -33,13 +33,9 @@ function authorizeMove(sens, configPlateau, ligne, colonne){
                 }
 
 function generatePlateau(idGame){
- 			    XHR('GET', idGame, {onload: function() {
-
- 						var configPlateau = JSON.parse(this.responseText);
- 						
-                        printTable(configPlateau); 						
-
- 					} } );
+                $.getJSON( idGame, function( data ) {
+                        printTable(data); 						
+ 					} );
 }
                             
                 
@@ -87,6 +83,9 @@ function printTable(configPlateau){
                         $(".ligne"+posTarget.l+" "+".colonne"+posTarget.c).html("<div class=\"target_"+posTarget.t+"\"></div>");
                         $("#lineTarget").val(posTarget.l);
                         $("#columnTarget").val(posTarget.c);
+                        $("#cible").removeClass();
+                        $("#moreColorInfo").html(posTarget.t);
+                        $("#cible").addClass('target_'+posTarget.t);
                         var line = posRobot[0].line;
                     
                         for(var l = posRobot[0].column+1; l<configPlateau.board[0].length ; l++){
@@ -97,13 +96,23 @@ function printTable(configPlateau){
                         }
                 }                        
                 
-var solutions = {};		
+var solutions = {};	
 
 function init(idGame,idPlayer) {
+    
+    $("#header").on('click', function(evt) {
+        history.back();
+    });
+    $("#butonAccueil").on('click', function(evt) {
+        evt.stopPropagation();
+        history.back();
+    });
+
 	// Connect to the SocketIO server to retrieve ongoing games.
     generatePlateau(idGame); 
                         
 	socket = io.connect();
+    
 	socket.on('participants', function(data) {
 		var ul = document.getElementById('lesParticipants');
 		ul.innerHTML = '';
