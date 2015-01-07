@@ -38,12 +38,6 @@ $(document).ready(function () {
 	
 	$('#login2').keyup(function (){
 		var value = $('#login2').val();
-		
-		// if(value == ""){
-			// $('#newForm input[name="login"]').prop('disabled', true);
-		// }else{
-			// $('#newForm input[name="login"]').removeAttr('disabled');
-		// }
 		$('#newForm input[name="login"]').each( function () {
 			$( this ).val(value);
 		});
