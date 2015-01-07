@@ -99,6 +99,9 @@ var solutions = {};
 
 function init(idGame,idPlayer) {
     
+    $("#header").on('click', function(evt) {
+        history.back();
+    });
     $("#butonAccueil").on('click', function(evt) {
         evt.stopPropagation();
         history.back();
