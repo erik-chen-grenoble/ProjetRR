@@ -27,11 +27,11 @@ function selectRobot(color, line, column) {
 	$('#moveState').text("");
 	$('#selectedRobotLine').val(line);
 	$('#selectedRobotColumn').val(column);
-		selectedRobot.text(color);
-		selectedRobot.css({
+		//selectedRobot.text(color);
+		/*selectedRobot.css({
 			'color' : color,
 			'font-size' : '150%'
-		});
+		});*/
 		
 	refreshBoardColor();
 	// Update board movement possibilities

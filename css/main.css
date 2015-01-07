@@ -89,6 +89,14 @@ h1, h2, h3, h4{
 	display: inline-block;
 }
 
+#cible{
+    height: 30px;
+    display: inline-flex;
+    width: 30px;
+    background-position: 0px 6px;
+    padding: 7px;
+}
+
 #right-panel-participant{
 	margin-bottom: 15px;
 	font-size: 1.1em;
