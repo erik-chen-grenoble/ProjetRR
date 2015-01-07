@@ -95,13 +95,20 @@ function printTable(configPlateau){
                         }
                 }                        
                 
-var solutions = {};		
+var solutions = {};	
 
 function init(idGame,idPlayer) {
+    
+    $("#butonAccueil").on('click', function(evt) {
+        evt.stopPropagation();
+        history.back();
+    });
+
 	// Connect to the SocketIO server to retrieve ongoing games.
     generatePlateau(idGame); 
                         
 	socket = io.connect();
+    
 	socket.on('participants', function(data) {
 		var ul = document.getElementById('lesParticipants');
 		ul.innerHTML = '';
