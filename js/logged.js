@@ -84,6 +84,7 @@ function printTable(configPlateau){
                         $("#lineTarget").val(posTarget.l);
                         $("#columnTarget").val(posTarget.c);
                         $("#cible").removeClass();
+                        $("#moreColorInfo").html(posTarget.t);
                         $("#cible").addClass('target_'+posTarget.t);
                         var line = posRobot[0].line;
                     
