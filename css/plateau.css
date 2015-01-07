@@ -91,28 +91,28 @@ table {
 }
 
 
-.robot_red {
+.robot_red, .mrobot_red {
 	background : url("../medias/images-svg/robot-rouge.svg") no-repeat ;
 	background-size: 100% auto;
 	background-position: left top;
 	z-index: 10;
 }
 
-.robot_green {
+.robot_green,  .mrobot_green{
 	background : url("../medias/images-svg/robot-vert.svg") no-repeat ;
 	background-size: 100% auto;
 	background-position: left top;
 	z-index: 10;
 }
 
-.robot_blue {
+.robot_blue, .mrobot_blue {
 	background : url("../medias/images-svg/robot-bleu.svg") no-repeat ;
 	background-size: 100% auto;
 	background-position: left top;
 	z-index: 10;
 }
 
-.robot_yellow {
+.robot_yellow, .mrobot_yellow {
 	background : url("../medias/images-svg/robot-jaune.svg") no-repeat ;
 	background-size: 100% auto;
 	background-position: left top;
