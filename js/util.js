@@ -67,8 +67,7 @@ function addMovement(lineDestination, columnDestination) {
             // Check if the robot is in the target
             if(isRobotOnTarget(lineDestination,columnDestination)){
             	// End the game
-            	proposition();
-//            	reset();
+            	document.getElementById('moveState').innerHTML = "Vous pouvez proposer cette solution !";
             }
         }
     }
