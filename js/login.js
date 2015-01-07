@@ -1,4 +1,10 @@
 function init() {
+    $('#submitBouton').click(
+        function(){
+            if(checkSubmit()){
+                $("#nouvellePartie").submit();
+            }
+    });
 	// Connect to the SocketIO server to retrieve ongoing games.
 	socket = io.connect();
 	socket.on('gamesList', function(data) {
@@ -16,6 +22,19 @@ function init() {
 	socket.emit('loginPage');
 }
 
+function checkSubmit(){
+    var data = $("#idGame").val();
+    
+    if(data==""){
+        alert("Nom de partie vide");
+    }
+    else if(!(data.match(/^[-_ a-zA-Z0-9]+$/))) {
+       alert("Merci de renseigner seulement des lettres ou chiffres");       
+    }else{
+        return true;   
+    }
+    return false;
+}
 // function changeLogin(){
 	// if (document.getElementById('login') != null) {
 		// console.log(document.getElementById('login').value);

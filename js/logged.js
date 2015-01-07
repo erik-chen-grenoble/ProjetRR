@@ -33,13 +33,9 @@ function authorizeMove(sens, configPlateau, ligne, colonne){
                 }
 
 function generatePlateau(idGame){
- 			    XHR('GET', idGame, {onload: function() {
-
- 						var configPlateau = JSON.parse(this.responseText);
- 						
-                        printTable(configPlateau); 						
-
- 					} } );
+                $.getJSON( idGame, function( data ) {
+                        printTable(data); 						
+ 					} );
 }
                             
                 
