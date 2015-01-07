@@ -29,16 +29,15 @@ function checkSubmit(){
     var data = $("#idGame").val();
     var login = $("#login").val();
     
-    if(login==""){
-        $("#login").val(createNewName);
-    }
-    
     if(data==""){
         alert("Nom de partie vide");
     }
     else if(!(data.match(/^[-_ a-zA-Z0-9]+$/))) {
        alert("Merci de renseigner seulement des lettres ou chiffres");       
     }else{
+        if(login==""){
+            $("#login").val(createNewName);
+        }
         return true;   
     }
     return false;
