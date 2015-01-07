@@ -31,6 +31,14 @@
 	<input id="columnTarget" type="hidden" value=""/>
 	<input id="selectedRobotLine" type="hidden" value=""/>
 	<input id="selectedRobotColumn" type="hidden" value=""/>
+	
+	<div id="size_changer">
+		<div class="btn-group" role="group">
+			<button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Augmenter la taille du texte" id="agrandir">A +</button>
+			<button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Diminuer la taille du texte" id="diminuer">A -</button>
+		</div>
+	</div>
+	
     <div class="container">
 
       	<div class="row" id="header">
@@ -62,17 +70,17 @@
 
             <div id="right-panel-content">
 
-              <div class="row">
+              <div class="row" style="padding-bottom:10px;">
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   <div class="zone-coups">
-                      <div class="zone-texte"> Nombre de coups</div>
+                      <div class="zone-texte texte_SC"> Nombre de coups</div>
                       <div class="zone-nb-coups"> 0 </div>
                   </div>
                 </div>
 
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   <div class="zone-temps">
-                      <div class="zone-texte"> Temps restant</div>
+                      <div class="zone-texte texte_SC"> Temps restant</div>
                       <div class="zone-nb-temps">
                         <object data="medias/images-svg/infinity-icon.svg" type="image/svg+xml">
                           infini
@@ -88,8 +96,8 @@
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   <div id="right-panel-participant">
 						<div id="right-panel-participant-content">
-							<div class="zone-texte"> Participants</div>
-							<ul id="lesParticipants" />
+							<div class="zone-texte texte_SC"> Participants</div>
+							<ul id="lesParticipants" class="texte_SC"></ul>
 						</div>
 					</div>
                 </div>
@@ -97,8 +105,8 @@
                 <div class="col-sm-3 col-xs-3 col-md-12">
                   	<span id="selectedRobot"></span>
                     <div id="moveState"></div>
-                    <button id="sendSolution" class="btn button-go" onclick="proposition()">Envoyer la solution</button>
-                    <button id="resetSolution" class="btn button-go" onclick="reset()">Réinitialiser</button>
+                    <button id="sendSolution" class="btn button-go texte_SC" onclick="proposition()">Envoyer la solution</button>
+                    <button id="resetSolution" class="btn button-go texte_SC" onclick="reset()">Réinitialiser</button>
                 </div>
               </div>
             </div>
@@ -138,10 +146,14 @@
 		</div>
 			
 			
-      <div class="row" id="footer">
+      <div class="row texte_SC" id="footer">
 		4TREL Team - M2 MIAGE 2014/2015
       </div>
 
     </div>
+	<!-- Fichiers Javascript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
